@@ -51,7 +51,7 @@ typedef volatile struct tagLCDC_REG
 	unsigned int WIN1_SCL_FACTOR_CBR;     //0x70 Win1 YRGB scaling factor setting
 	unsigned int WIN1_SCL_OFFSET;         //0x74 Win1 Cbr scaling start point offset
 	unsigned int WIN2_MST;		 		  //0x78 win2 memort start address
-	unsigned int WIN2_VIR;				  //0x7c win2 virtual stride
+	unsigned int WIM2_VIR;				  //0x7c win2 virtual stride
 	unsigned int WIN2_DSP_INFO;           //0x80 Win2 display width/height on panel
 	unsigned int WIN2_DSP_ST;             //0x84 Win2 display start point on panel
 	unsigned int HWC_MST;                 //0x88 HWC memory start address
@@ -70,12 +70,13 @@ typedef volatile struct tagLCDC_REG
 	unsigned int reserved1[(0x100-0xc4)/4];
 	unsigned int MCU_BYPASS_WPORT;         //0x100 MCU BYPASS MODE, DATA Write Only Port
 	unsigned int reserved2[(0x200-0x104)/4];
-	unsigned int MCU_BYPASS_RPORT;         //0x200 MCU BYPASS MODE, DATA Read Only Port   
+	unsigned int MCU_BYPASS_RPORT;         //0x200 MCU BYPASS MODE, DATA Read Only Port  
+	//$_rbox_$_modify_$ zhy modified added for lut modify
 	unsigned int reserved3[(0x400-0x204)/4];
 	unsigned int WIN2_LUT_ADDR;
 	unsigned int reserved4[(0x800-0x404)/4];
 	unsigned int DSP_LUT_ADDR;
-  
+	//$_rbox_$_modify_end
 } LCDC_REG, *pLCDC_REG;
 
 
@@ -481,8 +482,9 @@ struct rk30_lcdc_device{
 	
 	LCDC_REG *preg;         // LCDC reg base address and backup reg 
     	LCDC_REG regbak;
+    //$_rbox_$_modify_$ zhy added for lut modify
 	int __iomem *dsp_lut_addr_base;
-
+	//$_rbox_$_modify_end
 	void __iomem *reg_vir_base;  	// virtual basic address of lcdc register
 	u32 reg_phy_base;       	// physical basic address of lcdc register
 	u32 len;               		// physical map length of lcdc register

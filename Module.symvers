@@ -1858,6 +1858,7 @@
 0x00000000	console_unlock	vmlinux	EXPORT_SYMBOL
 0x00000000	arm_pm_restart	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	udp_sendmsg	vmlinux	EXPORT_SYMBOL
+0x00000000	get_fb_layer_id	vmlinux	EXPORT_SYMBOL
 0x00000000	elv_rb_former_request	vmlinux	EXPORT_SYMBOL
 0x00000000	__kfifo_dma_out_prepare_r	vmlinux	EXPORT_SYMBOL
 0x00000000	qdisc_class_hash_destroy	vmlinux	EXPORT_SYMBOL
