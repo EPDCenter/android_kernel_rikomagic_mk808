@@ -287,11 +287,7 @@ deps_config := \
 	drivers/video/console/Kconfig \
 	drivers/video/rockchip/lvds/Kconfig \
 	drivers/video/rockchip/rga/Kconfig \
-	drivers/video/rockchip/hdmi/chips/rk610/Kconfig \
-	drivers/video/rockchip/hdmi/chips/rk2928/Kconfig \
-	drivers/video/rockchip/hdmi/chips/rk30/hdcp/Kconfig \
-	drivers/video/rockchip/hdmi/chips/rk30/Kconfig \
-	drivers/video/rockchip/hdmi/chips/Kconfig \
+	drivers/video/rockchip/hdmi/hdcp/Kconfig \
 	drivers/video/rockchip/hdmi/Kconfig \
 	drivers/video/rockchip/Kconfig \
 	drivers/video/hdmi/chips/Kconfig \

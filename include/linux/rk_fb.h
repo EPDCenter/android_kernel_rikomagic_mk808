@@ -25,7 +25,7 @@
 
 #define RK30_MAX_LCDC_SUPPORT	4
 #define RK30_MAX_LAYER_SUPPORT	4
-#define RK_MAX_FB_SUPPORT       8
+#define RK_MAX_FB_SUPPORT     4
 
 
 
@@ -142,16 +142,6 @@ enum data_format{
 	YUV444,
 };
 
-enum fb_win_map_order{
-	FB_DEFAULT_ORDER	   = 0,
-	FB0_WIN2_FB1_WIN1_FB2_WIN0 = 012,
-	FB0_WIN1_FB1_WIN2_FB2_WIN0 = 021, 
-	FB0_WIN2_FB1_WIN0_FB2_WIN1 = 102,
-	FB0_WIN0_FB1_WIN2_FB2_WIN1 = 120,
-	FB0_WIN0_FB1_WIN1_FB2_WIN2 = 210,
-	FB0_WIN1_FB1_WIN0_FB2_WIN2 = 201,       
-};
-
 struct rk_fb_rgb {
 	struct fb_bitfield	red;
 	struct fb_bitfield	green;
@@ -203,21 +193,15 @@ struct rk_lcdc_device_driver{
 	int num_layer;
 	int num_buf;				//the num_of buffer
 	int fb_index_base;                     //the first fb index of the lcdc device
-	rk_screen *screen0;		      //some platform have only one lcdc,but extend
-	rk_screen *screen1;		      //two display devices for dual display,such as rk2918,rk2928
-	rk_screen *cur_screen;		     //screen0 is primary screen ,like lcd panel,screen1 is  extend screen,like hdmi
+	rk_screen *screen;
 	u32 pixclock;
 
-	
-        char fb0_win_id;
-        char fb1_win_id;
-        char fb2_win_id;
-        struct mutex fb_win_id_mutex;
-	
 	struct completion  frame_done;		  //sync for pan_display,whe we set a new frame address to lcdc register,we must make sure the frame begain to display
 	spinlock_t  cpl_lock; 			 //lock for completion  frame done
 	int first_frame ;
-
+	int x_scale;
+	int y_scale;
+//$_rbox_$_modify_end
 	struct rk29fb_info *screen_ctr_info;
 	int (*open)(struct rk_lcdc_device_driver *dev_drv,int layer_id,bool open);
 	int (*init_lcdc)(struct rk_lcdc_device_driver *dev_drv);
@@ -227,16 +211,14 @@ struct rk_lcdc_device_driver{
 	int (*blank)(struct rk_lcdc_device_driver *dev_drv,int layer_id,int blank_mode);
 	int (*set_par)(struct rk_lcdc_device_driver *dev_drv,int layer_id);
 	int (*pan_display)(struct rk_lcdc_device_driver *dev_drv,int layer_id);
-	ssize_t (*get_disp_info)(struct rk_lcdc_device_driver *dev_drv,char *buf,int layer_id);
+	int (*get_disp_info)(struct rk_lcdc_device_driver *dev_drv,int layer_id);
 	int (*load_screen)(struct rk_lcdc_device_driver *dev_drv, bool initscreen);
 	int (*get_layer_state)(struct rk_lcdc_device_driver *dev_drv,int layer_id);
 	int (*ovl_mgr)(struct rk_lcdc_device_driver *dev_drv,int swap,bool set);  //overlay manager
 	int (*fps_mgr)(struct rk_lcdc_device_driver *dev_drv,int fps,bool set);
-	int (*fb_get_layer)(struct rk_lcdc_device_driver *dev_drv,const char *id);                                      //find layer for fb
-	int (*fb_layer_remap)(struct rk_lcdc_device_driver *dev_drv,enum fb_win_map_order order);
 	int (*set_dsp_lut)(struct rk_lcdc_device_driver *dev_drv,int *lut);
 	int (*read_dsp_lut)(struct rk_lcdc_device_driver *dev_drv,int *lut);
-	
+	//$_rbox_$_modify_end
 };
 
 struct rk_fb_inf {

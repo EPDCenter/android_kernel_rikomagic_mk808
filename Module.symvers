@@ -3084,6 +3084,7 @@
 0x00000000	orderly_poweroff	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	hci_le_ltk_reply	vmlinux	EXPORT_SYMBOL
 0x00000000	usb_storage_usb_ids	vmlinux	EXPORT_SYMBOL_GPL
+0x00000000	vesa_modes	vmlinux	EXPORT_SYMBOL
 0x00000000	usermodehelper_is_disabled	vmlinux	EXPORT_SYMBOL_GPL
 0x00000000	pn_skb_send	vmlinux	EXPORT_SYMBOL
 0x00000000	__netif_schedule	vmlinux	EXPORT_SYMBOL
